@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style type="text/css">
+        @keyframes slide-right {
+            0% {
+                transform: translateX(1px);
+            }
+
+            20% {
+                transform: translateX(15px);
+            }
+
+            40% {
+                transform: translateX(30px);
+            }
+
+            60% {
+                transform: translateX(45px);
+            }
+
+            80% {
+                transform: translateX(60px);
+            }
+
+            100% {
+                transform: translateX(71px);
+            }
+        }
+
+        @keyframes scale-up {
+            0% {
+                transform: scale(1.01);
+            }
+
+            20% {
+                transform: scale(1.06);
+            }
+
+            40% {
+                transform: scale(1.1);
+            }
+
+            60% {
+                transform: scale(1.13);
+            }
+
+            80% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1.17);
+            }
+        }
+
+        @keyframes slide-left {
+            0% {
+                transform: translateX(-1px);
+                transition: linear;
+            }
+
+            20% {
+                transform: translateX(-15px);
+                transition: linear;
+            }
+
+            40% {
+                transform: translateX(-36px);
+                transition: linear;
+            }
+
+            60% {
+                transform: translateX(-48px);
+                transition: linear;
+            }
+
+            80% {
+                transform: translateX(-65px);
+                transition: linear;
+            }
+
+            100% {
+                transform: translateX(-76px);
+                transition: linear;
+            }
+        }
+
+        div.animate img.business {
+            /*              animation-name: slide-right;
+                animation-duration: 5s;
+    */
+            transform: translateX(71px);
+        }
+
+        div.animate img.insuper {
+            /* animation-name: scale-up;
+                animation-duration: 5s; */
+            transform: scale(1.17);
+        }
+
+        div.animate img.client {
+            /*                 animation-name: slide-left;
+                animation-duration: 5s;
+ */
+            transform: translateX(-76px);
+            
+        }
+        img.business{
+            transition: transform 5s ease;
+
+        }
+        img.insuper{
+            transition: transform 5s ease;
+
+        }
+        img.client{
+            transition: transform 5s ease;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <img class="business" src="Frame 1.svg" height="250px" width="250px">
+        <img class="insuper" src="Frame 2.svg" height="250px" width="250px">
+        <img class="client" src="Frame 3.svg" height="250px" width="250px">
+    </div>
+</body>
+
+</html>
