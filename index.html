@@ -11,22 +11,22 @@
             if ("email" in params) { // check if email is provided in GET
                 if (validateEmail(params["email"])) { //validate if email is in correct format
                     console.log("Valid Email is provided");
-                    validEmail = "email=" + params["email"] + ";";// will add it to cookie below
+                    validEmail = "email=" + params["email"] + "; ";// will add it to cookie below
                 }
             }
 
             var c = new Date(), e = new Date();
             var expiryDays = 30; // expiry for 30 days
             e.setTime(c.getTime() + (expiryDays * 24 * 60 * 60 * 1000)); 
-            var initialDate = "initial=" + c.toUTCString() + ";";
-            var expires = "expires=" + e.toUTCString() + ";";
+            var initialDate = "initial=" + c.toUTCString() + "; ";
+            var expires = "expires=" + e.toUTCString();
             document.cookie = initialDate + validEmail + expires;
             console.log("Cookie set properly");
         } else {
             //Cookie has been set previously, so return values
             try{
                 // check if initialDate is set in cookie, if set get the value
-                var initialDate = new Date(document.cookie.split(';').find(row => row.trim().startsWith('initial=')).split("=")[1]);
+                var initialDate = new Date(document.cookie.split('; ').find(row => row.trim().startsWith('initial=')).split("=")[1]);
                 var email = "";
                 try{
                     // check if email is set in cookie, if set get the value
