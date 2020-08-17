@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <title>Cookie Test</title>
 </head>
-
 <body>
-
     <script>
-
         if (document.cookie == "") {
             //No Cookie has been set previously, so set it now
-
             var params = getParams(window.location.href); //get all GET paramaters from URL
             var validEmail = "";
             if ("email" in params) { // check if email is provided in GET
                 if (validateEmail(params["email"])) { //validate if email is in correct format
-                    console.log("Valid Email is provided");
-                    validEmail = "email=" + params["email"] + ";";
+                    cosole.log("Valid Email is provided");
+                    validEmail = "email=" + params["email"] + ";";// will add it to cookie below
                 }
             }
 
             var c = new Date(), e = new Date();
-            e.setTime(c.getTime() + (30 * 24 * 60 * 60 * 1000)); // set expir for 30 days
+            var expiryDays = 30; // expiry for 30 days
+            e.setTime(c.getTime() + (expiryDays * 24 * 60 * 60 * 1000)); 
             var initialDate = "initial=" + c.toUTCString() + ";";
             var expires = "expires=" + e.toUTCString() + ";";
-            var path = "";
-            document.cookie = initialDate + validEmail + expires + path;
+            document.cookie = initialDate + validEmail + expires;
             console.log("Cookie set properly");
         } else {
-            //Cookie has been set previously, so perform checks
+            //Cookie has been set previously, so return values
+            try{
+                // check if initialDate is set in cookie, if set get the value
+                var initialDate = new Date(document.cookie.split(';').find(row => row.trim().startsWith('initial=')).split("=")[1]);
+                var email = "";
+                try{
+                    // check if email is set in cookie, if set get the value
+                    email = document.cookie.split(';').find(row => row.trim().startsWith('email=')).split("=")[1];                    
+                }catch{
+                    console.log("No email set in cookie.");
+                }
+                var elapsedDays = (Date.now() - initialDate)/(1000*60*60*24); // convert initialDate to elaped days
+                var daysCheck = 4; 
+                if(elapsedDays > daysCheck){ // if initialDate passed 4 days, perform redirection
+                    redirectTo(); // 4 days have passed, redirect
+                }else{
+                    // initialDate hasn't passed 4 days
+                }
 
+            }catch{
+                console.log("Cookie is set but, does not have initial datetime.");
+            }
         }
 
         function getParams(url) {
@@ -56,23 +72,10 @@
             return false
         }
 
-        function getCookie(cname) {
-            var name = cname + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var ca = decodedCookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
+        function redirectTo(){
+            console.log("Provide url for redirection");
+            // location.href = "url";
         }
-
-
     </script>
 </body>
 
