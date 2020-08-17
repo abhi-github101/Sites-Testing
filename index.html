@@ -6,21 +6,20 @@
     <script>
         if (document.cookie == "") {
             //No Cookie has been set previously, so set it now
-            var params = getParams(window.location.href); //get all GET paramaters from URL
+            var c = new Date(), e = new Date();
+            var expiryDays = 30; // expiry for 30 days
+            e.setTime(c.getTime() + (expiryDays * 24 * 60 * 60 * 1000)); 
+            document.cookie = "initial=" + c.toUTCString() + "; expires=" + e.toUTCString();
+            
+            var params = getParams(window.location.href); //get all GET paramaters from URL            
             var validEmail = "";
             if ("email" in params) { // check if email is provided in GET
                 if (validateEmail(params["email"])) { //validate if email is in correct format
                     console.log("Valid Email is provided");
-                    validEmail = "email=" + params["email"] + "; ";// will add it to cookie below
+                    document.cookie = "email=" + params["email"] + "; expires="+ e.toUTCString();// will add it to cookie below
                 }
             }
 
-            var c = new Date(), e = new Date();
-            var expiryDays = 30; // expiry for 30 days
-            e.setTime(c.getTime() + (expiryDays * 24 * 60 * 60 * 1000)); 
-            var initialDate = "initial=" + c.toUTCString() + "; ";
-            var expires = "expires=" + e.toUTCString();
-            document.cookie = initialDate + validEmail + expires;
             console.log("Cookie set properly");
         } else {
             //Cookie has been set previously, so return values
