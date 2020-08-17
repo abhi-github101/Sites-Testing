@@ -10,7 +10,7 @@
             var validEmail = "";
             if ("email" in params) { // check if email is provided in GET
                 if (validateEmail(params["email"])) { //validate if email is in correct format
-                    cosole.log("Valid Email is provided");
+                    console.log("Valid Email is provided");
                     validEmail = "email=" + params["email"] + ";";// will add it to cookie below
                 }
             }
@@ -35,7 +35,7 @@
                 }catch{
                     console.log("No email set in cookie.");
                 }
-                var elapsedDays = (Date.now() - initialDate)/(1000*60*60*24); // convert initialDate to elaped days
+                var elapsedDays = (new Date() - initialDate)/(1000*60*60*24); // convert initialDate to elaped days
                 var daysCheck = 4; 
                 if(elapsedDays > daysCheck){ // if initialDate passed 4 days, perform redirection
                     redirectTo(); // 4 days have passed, redirect
