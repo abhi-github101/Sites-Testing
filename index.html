@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cookie Test</title>
 </head>
 <body>
     <script>
@@ -32,6 +31,7 @@
                 try{
                     // check if email is set in cookie, if set get the value
                     email = document.cookie.split(';').find(row => row.trim().startsWith('email=')).split("=")[1];                    
+                    console.log("Email set in cookie.");
                 }catch{
                     console.log("No email set in cookie.");
                 }
@@ -41,6 +41,7 @@
                     redirectTo(); // 4 days have passed, redirect
                 }else{
                     // initialDate hasn't passed 4 days
+                    console.log("Do some other tasks")
                 }
 
             }catch{
